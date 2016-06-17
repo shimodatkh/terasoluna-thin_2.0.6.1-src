@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans 
+  PUBLIC "-//SPRING//DTD BEAN//EN" 
+  "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  
+  <!-- メッセージプロパティファイル用 -->
+  <bean id="propertyMessageSource01"
+    class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames" 
+              value="jp.terasoluna.fw.web.struts.util.SpringMessageResourcesTest01" />
+  </bean>
+
+  <!-- メッセージプロパティファイル(ロケール指定)用 -->  
+  <bean id="propertyMessageSource_locale_en"
+    class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames" 
+              value="jp.terasoluna.fw.web.struts.util.SpringMessageResourcesTest02_en" />
+  </bean>
+
+  <!-- DBメッセージ用(親メッセージソースと同一のキーが存在する) -->  
+  <bean id="dbMessageSource01"
+    class="jp.terasoluna.fw.web.struts.util.SpringMessageResourcesTest_DataSourceMessageSourceStub01">
+    <property name="parentMessageSource" ref="propertyMessageSource01" />
+  </bean>
+  
+  <!-- DBメッセージ用(親メッセージソースと別のキーが存在する) -->  
+  <bean id="dbMessageSource02"
+    class="jp.terasoluna.fw.web.struts.util.SpringMessageResourcesTest_DataSourceMessageSourceStub02">
+    <property name="parentMessageSource" ref="propertyMessageSource01" />
+  </bean>
+  
+  <!-- DBメッセージ用(親メッセージソースと別のキーが存在する) -->  
+  <bean id="dbMessageSource03"
+    class="jp.terasoluna.fw.web.struts.util.SpringMessageResourcesTest_DataSourceMessageSourceStub02">
+  </bean>
+  <bean id="propertyMessageSource02"
+    class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames" 
+              value="jp.terasoluna.fw.web.struts.util.SpringMessageResourcesTest01" />
+    <property name="parentMessageSource" ref="dbMessageSource03" />
+  </bean>
+  
+
+  <!-- デフォルトのメッセージソース -->
+  <bean id="messageSource"
+    class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames" 
+              value="jp.terasoluna.fw.web.struts.util.SpringMessageResourcesTest03" />
+  </bean>
+  
+</beans>
